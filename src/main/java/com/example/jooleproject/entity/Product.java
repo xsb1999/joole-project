@@ -25,10 +25,20 @@ public class Product implements Serializable {
     private Integer descriptionId;
     @Basic
     @Column(name = "product_brand", nullable = true)
-    private Object productBrand;
+    private String productBrand;
     @Basic
     @Column(name = "certification", nullable = true)
-    private Object certification;
+    private String certification;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private TechnicalDetail technicalDetail;
+
+//    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+//    private Description description;
+//
+//    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+//    private ProductType productType;
+
 
     public int getProductId() {
         return productId;
@@ -38,68 +48,37 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Integer getProductTypeId() {
-        return productTypeId;
-    }
-
-    public void setProductTypeId(Integer productTypeId) {
-        this.productTypeId = productTypeId;
-    }
-
-    public Integer getTechnicalDetailId() {
-        return technicalDetailId;
-    }
-
-    public void setTechnicalDetailId(Integer technicalDetailId) {
-        this.technicalDetailId = technicalDetailId;
-    }
-
-    public Integer getDescriptionId() {
-        return descriptionId;
-    }
-
-    public void setDescriptionId(Integer descriptionId) {
-        this.descriptionId = descriptionId;
-    }
-
-    public Object getProductBrand() {
+    public String getProductBrand() {
         return productBrand;
     }
 
-    public void setProductBrand(Object productBrand) {
+    public void setProductBrand(String productBrand) {
         this.productBrand = productBrand;
     }
 
-    public Object getCertification() {
+    public String getCertification() {
         return certification;
     }
 
-    public void setCertification(Object certification) {
+    public void setCertification(String certification) {
         this.certification = certification;
+    }
+
+    public TechnicalDetail getTechnicalDetail() {
+        return technicalDetail;
+    }
+
+    public void setTechnicalDetail(TechnicalDetail technicalDetail) {
+        this.technicalDetail = technicalDetail;
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "productId=" + productId +
-                ", productTypeId=" + productTypeId +
-                ", technicalDetailId=" + technicalDetailId +
-                ", descriptionId=" + descriptionId +
-                ", productBrand=" + productBrand +
-                ", certification=" + certification +
+                ", productBrand='" + productBrand + '\'' +
+                ", certification='" + certification + '\'' +
+                ", technicalDetail=" + technicalDetail +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return productId == product.productId && Objects.equals(productTypeId, product.productTypeId) && Objects.equals(technicalDetailId, product.technicalDetailId) && Objects.equals(descriptionId, product.descriptionId) && Objects.equals(productBrand, product.productBrand) && Objects.equals(certification, product.certification);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(productId, productTypeId, technicalDetailId, descriptionId, productBrand, certification);
     }
 }

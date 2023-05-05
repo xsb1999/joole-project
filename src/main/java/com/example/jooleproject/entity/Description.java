@@ -67,7 +67,6 @@ public class Description implements Serializable {
         this.model = model;
     }
 
-
     @Override
     public String toString() {
         return "Description{" +
@@ -77,18 +76,5 @@ public class Description implements Serializable {
                 ", series='" + series + '\'' +
                 ", model='" + model + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Description that = (Description) o;
-        return descriptionId == that.descriptionId && Objects.equals(productId, that.productId) && Objects.equals(manufacturer, that.manufacturer) && Objects.equals(series, that.series) && Objects.equals(model, that.model);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(descriptionId, productId, manufacturer, series, model);
     }
 }

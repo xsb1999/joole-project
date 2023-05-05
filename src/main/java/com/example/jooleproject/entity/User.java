@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +23,8 @@ public class User implements Serializable{
     @Basic
     @Column(name = "user_password", nullable = true, length = 100)
     private String userPassword;
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+    List<Project> projectList = new ArrayList<>();
 
     public String getUserName() {
         return userName;
@@ -46,12 +50,21 @@ public class User implements Serializable{
         this.userPassword = userPassword;
     }
 
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userName='" + userName + '\'' +
                 ", userType='" + userType + '\'' +
                 ", userPassword='" + userPassword + '\'' +
+                ", projectList=" + projectList +
                 '}';
     }
 

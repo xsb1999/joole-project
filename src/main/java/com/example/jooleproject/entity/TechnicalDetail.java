@@ -14,9 +14,9 @@ public class TechnicalDetail implements Serializable {
     @Id
     @Column(name = "technical_detail_id", nullable = false)
     private int technicalDetailId;
-    @Basic
-    @Column(name = "product_id", nullable = true)
-    private Integer productId;
+//    @Basic
+//    @Column(name = "product_id", nullable = true)
+//    private Integer productId;
     @Basic
     @Column(name = "airflow", nullable = true)
     private Integer airflow;
@@ -30,20 +30,16 @@ public class TechnicalDetail implements Serializable {
     @Column(name = "fan_speed", nullable = true)
     private Integer fanSpeed;
 
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
     public int getTechnicalDetailId() {
         return technicalDetailId;
     }
 
     public void setTechnicalDetailId(int technicalDetailId) {
         this.technicalDetailId = technicalDetailId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public Integer getAirflow() {
@@ -78,28 +74,23 @@ public class TechnicalDetail implements Serializable {
         this.fanSpeed = fanSpeed;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "TechnicalDetail{" +
                 "technicalDetailId=" + technicalDetailId +
-                ", productId=" + productId +
                 ", airflow=" + airflow +
                 ", power=" + power +
                 ", operatingVoltage=" + operatingVoltage +
                 ", fanSpeed=" + fanSpeed +
+                ", product=" + product +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TechnicalDetail that = (TechnicalDetail) o;
-        return technicalDetailId == that.technicalDetailId && Objects.equals(productId, that.productId) && Objects.equals(airflow, that.airflow) && Objects.equals(power, that.power) && Objects.equals(operatingVoltage, that.operatingVoltage) && Objects.equals(fanSpeed, that.fanSpeed);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(technicalDetailId, productId, airflow, power, operatingVoltage, fanSpeed);
     }
 }

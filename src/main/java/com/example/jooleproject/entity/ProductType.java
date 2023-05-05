@@ -102,17 +102,4 @@ public class ProductType implements Serializable {
                 ", modelYear=" + modelYear +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductType that = (ProductType) o;
-        return productTypeId == that.productTypeId && Objects.equals(productId, that.productId) && Objects.equals(application, that.application) && Objects.equals(type, that.type) && Objects.equals(mountingLocation, that.mountingLocation) && Objects.equals(accessories, that.accessories) && Objects.equals(modelYear, that.modelYear);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(productTypeId, productId, application, type, mountingLocation, accessories, modelYear);
-    }
 }

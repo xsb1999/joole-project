@@ -6,6 +6,14 @@ spring:
     url: jdbc:mysql://localhost:3306/joole?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false&useUnicode=true&allowMultiQueries=true
     username: root
     password: xsb19991109
+  jpa:
+    hibernate.ddl-auto: update
+    format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
 logging:
   level:
     org.springframework.orm.jpa: debug

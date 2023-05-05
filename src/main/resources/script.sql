@@ -10,12 +10,8 @@ Target Server Type    : MYSQL
 Target Server Version : 80019
 File Encoding         : 65001
 
-Date: 2023-05-03 14:26:30
+Date: 2023-05-05 00:54:54
 */
-
-drop database if exists joole;
-create database joole;
-use joole;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -47,8 +43,8 @@ CREATE TABLE `product` (
   `product_type_id` int DEFAULT NULL,
   `technical_detail_id` int DEFAULT NULL,
   `description_id` int DEFAULT NULL,
-  `product_brand` multilinestring DEFAULT NULL,
-  `certification` multilinestring DEFAULT NULL,
+  `product_brand` varchar(500) DEFAULT NULL,
+  `certification` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `product_description_description_id_fk` (`description_id`),
   KEY `product_product_type_product_type_id_fk` (`product_type_id`),
