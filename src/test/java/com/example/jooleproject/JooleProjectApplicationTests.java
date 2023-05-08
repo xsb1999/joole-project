@@ -54,13 +54,19 @@ class JooleProjectApplicationTests {
     void testProjectAndUser() {
         Project project1 = new Project();
         User user = new User();
-        user.setUserName("Jim");
+        user.setUserName("Jack");
         List<Project> projects = new ArrayList<>();
         projects.add(project1);
-        project1.setUser(user);
         user.setProjectList(projects);
+        project1.setUser(user);
+//        projectRepository.save(project1);
         userRepository.save(user);
-//        userRepository.deleteById("Kim");
+//        userRepository.deleteById("Jack");
+    }
+
+    @Test
+    void testDeleteUser() {
+        userRepository.deleteById("Jack");
     }
 
     @Test
