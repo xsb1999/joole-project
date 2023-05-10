@@ -1,5 +1,6 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,7 +24,8 @@ public class User implements Serializable{
     @Basic
     @Column(name = "user_password", nullable = true, length = 100)
     private String userPassword;
-    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     List<Project> projectList = new ArrayList<>();
 
     public String getUserName() {

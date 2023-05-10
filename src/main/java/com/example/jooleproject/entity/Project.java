@@ -1,9 +1,12 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "project", schema = "joole", catalog = "")
@@ -16,7 +19,12 @@ public class Project implements Serializable {
     private int projectId;
     @ManyToOne
     @JoinColumn(name = "user_name")
+    @JsonBackReference
     private User user;
+
+    @OneToMany(mappedBy="project", cascade = CascadeType.REMOVE)
+//    @JsonManagedReference
+    private Set<ProjectProduct> projectProducts;
 
     public int getProjectId() {
         return projectId;
@@ -34,31 +42,20 @@ public class Project implements Serializable {
         this.user = user;
     }
 
+    public Set<ProjectProduct> getProjectProducts() {
+        return projectProducts;
+    }
+
+    public void setProjectProducts(Set<ProjectProduct> projectProducts) {
+        this.projectProducts = projectProducts;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
                 "projectId=" + projectId +
                 ", user=" + user +
+                ", projectProducts=" + projectProducts +
                 '}';
     }
-//    public String getUserName() {
-//        return userName;
-//    }
-//
-//    public void setUserName(String userName) {
-//        this.userName = userName;
-//    }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Project project = (Project) o;
-//        return projectId == project.projectId && Objects.equals(userName, project.userName);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(projectId, userName);
-//    }
 }

@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,10 +28,10 @@ class JooleProjectApplicationTests {
     @Test
     void testTechnicalDetailAndProduct() {
         Product product = new Product();
-        product.setProductBrand("new product 111");
+        product.setProductBrand("NP666");
 
         TechnicalDetail technicalDetail = new TechnicalDetail();
-        technicalDetail.setFanSpeed(88);
+        technicalDetail.setFanSpeed(888);
 
         product.setTechnicalDetail(technicalDetail);
         technicalDetail.setProduct(product);
@@ -43,11 +42,42 @@ class JooleProjectApplicationTests {
 
     }
 
+    @Test
+    void testProjectUser() {
+        User user = userRepository.findByUserName("Anna");
+        List<Project> projectList = user.getProjectList();
+        Project project = new Project();
+        project.setUser(user);
+        projectList.add(project);
+        user.setProjectList(projectList);
+        projectRepository.save(project);
+    }
 
     @Test
-    void testProduct() {
+    void testDeleteProjectAndProductRelation() {
+//        Product product = productRepository.findByProductId(23);
+//        product.setProjects(new HashSet<Project>());
+//        productRepository.save(product);
+//        projectRepository.deleteById(31);
+    }
+
+    @Test
+    void testProjectProduct() {
+//        User user = new User();
+//        user.setUserName("Spark");
+//        User user = userRepository.findByUserName("Andy");
+//        List<Project> projectList = user.getProjectList();
+        Project project = new Project();
         Product product = new Product();
-        productRepository.save(product);
+        product.setProductBrand("NY");
+
+
+//        project.setUser(user);
+//        projectList.add(project);
+//        user.setProjectList(projectList);
+//        userRepository.save(user);
+        projectRepository.save(project);
+//        productRepository.save(product);
     }
 
     @Test

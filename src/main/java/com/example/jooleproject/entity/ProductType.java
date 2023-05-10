@@ -1,5 +1,6 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,9 +17,6 @@ public class ProductType implements Serializable {
     @Column(name = "product_type_id", nullable = false)
     private int productTypeId;
     @Basic
-    @Column(name = "product_id", nullable = true)
-    private Integer productId;
-    @Basic
     @Column(name = "application", nullable = true, length = 100)
     private String application;
     @Basic
@@ -33,6 +31,10 @@ public class ProductType implements Serializable {
     @Basic
     @Column(name = "model_year", nullable = true)
     private Date modelYear;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    @JsonBackReference
+    private Product product;
 
     public int getProductTypeId() {
         return productTypeId;
@@ -40,14 +42,6 @@ public class ProductType implements Serializable {
 
     public void setProductTypeId(int productTypeId) {
         this.productTypeId = productTypeId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public String getApplication() {
@@ -90,16 +84,24 @@ public class ProductType implements Serializable {
         this.modelYear = modelYear;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "ProductType{" +
                 "productTypeId=" + productTypeId +
-                ", productId=" + productId +
                 ", application='" + application + '\'' +
                 ", type='" + type + '\'' +
                 ", mountingLocation='" + mountingLocation + '\'' +
                 ", accessories='" + accessories + '\'' +
                 ", modelYear=" + modelYear +
+                ", product=" + product +
                 '}';
     }
 }

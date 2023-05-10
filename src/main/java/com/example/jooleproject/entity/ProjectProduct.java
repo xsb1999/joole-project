@@ -1,5 +1,7 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,12 +16,16 @@ public class ProjectProduct implements Serializable {
     @Id
     @Column(name = "project_product_id", nullable = false)
     private int projectProductId;
-    @Basic
-    @Column(name = "project_id", nullable = true)
-    private Integer projectId;
-    @Basic
-    @Column(name = "product_id", nullable = true)
-    private Integer productId;
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JsonIgnore
+    @JoinColumn(name = "project_id")
+//    @JsonBackReference
+    Project project;
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JsonIgnore
+    @JoinColumn(name = "product_id")
+//    @JsonBackReference
+    Product product;
 
     public int getProjectProductId() {
         return projectProductId;
@@ -29,42 +35,28 @@ public class ProjectProduct implements Serializable {
         this.projectProductId = projectProductId;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
-
 
     @Override
     public String toString() {
         return "ProjectProduct{" +
                 "projectProductId=" + projectProductId +
-                ", projectId=" + projectId +
-                ", productId=" + productId +
+                ", project=" + project +
+                ", product=" + product +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProjectProduct that = (ProjectProduct) o;
-        return projectProductId == that.projectProductId && Objects.equals(projectId, that.projectId) && Objects.equals(productId, that.productId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(projectProductId, projectId, productId);
     }
 }

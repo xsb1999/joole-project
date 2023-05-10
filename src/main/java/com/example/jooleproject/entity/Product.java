@@ -1,9 +1,12 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "product", schema = "joole", catalog = "")
@@ -30,15 +33,21 @@ public class Product implements Serializable {
     @Column(name = "certification", nullable = true)
     private String certification;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private TechnicalDetail technicalDetail;
 
-//    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-//    private Description description;
-//
-//    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-//    private ProductType productType;
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Description description;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private ProductType productType;
+
+    @OneToMany(mappedBy="product", cascade = CascadeType.REMOVE)
+//    @JsonManagedReference
+    private Set<ProjectProduct> projectProducts;
 
     public int getProductId() {
         return productId;
@@ -46,6 +55,30 @@ public class Product implements Serializable {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public Integer getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(Integer productTypeId) {
+        this.productTypeId = productTypeId;
+    }
+
+    public Integer getTechnicalDetailId() {
+        return technicalDetailId;
+    }
+
+    public void setTechnicalDetailId(Integer technicalDetailId) {
+        this.technicalDetailId = technicalDetailId;
+    }
+
+    public Integer getDescriptionId() {
+        return descriptionId;
+    }
+
+    public void setDescriptionId(Integer descriptionId) {
+        this.descriptionId = descriptionId;
     }
 
     public String getProductBrand() {
@@ -72,13 +105,43 @@ public class Product implements Serializable {
         this.technicalDetail = technicalDetail;
     }
 
+    public Description getDescription() {
+        return description;
+    }
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public Set<ProjectProduct> getProjectProducts() {
+        return projectProducts;
+    }
+
+    public void setProjectProducts(Set<ProjectProduct> projectProducts) {
+        this.projectProducts = projectProducts;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "productId=" + productId +
+                ", productTypeId=" + productTypeId +
+                ", technicalDetailId=" + technicalDetailId +
+                ", descriptionId=" + descriptionId +
                 ", productBrand='" + productBrand + '\'' +
                 ", certification='" + certification + '\'' +
                 ", technicalDetail=" + technicalDetail +
+                ", description=" + description +
+                ", productType=" + productType +
+                ", projectProducts=" + projectProducts +
                 '}';
     }
 }

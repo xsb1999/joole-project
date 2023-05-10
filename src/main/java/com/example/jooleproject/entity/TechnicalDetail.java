@@ -1,5 +1,6 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,9 +15,6 @@ public class TechnicalDetail implements Serializable {
     @Id
     @Column(name = "technical_detail_id", nullable = false)
     private int technicalDetailId;
-//    @Basic
-//    @Column(name = "product_id", nullable = true)
-//    private Integer productId;
     @Basic
     @Column(name = "airflow", nullable = true)
     private Integer airflow;
@@ -32,6 +30,7 @@ public class TechnicalDetail implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Product product;
 
     public int getTechnicalDetailId() {

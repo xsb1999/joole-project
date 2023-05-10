@@ -1,5 +1,6 @@
 package com.example.jooleproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,9 +16,6 @@ public class Description implements Serializable {
     @Column(name = "description_id", nullable = false)
     private int descriptionId;
     @Basic
-    @Column(name = "product_id", nullable = true)
-    private Integer productId;
-    @Basic
     @Column(name = "manufacturer", nullable = true, length = 100)
     private String manufacturer;
     @Basic
@@ -26,6 +24,10 @@ public class Description implements Serializable {
     @Basic
     @Column(name = "model", nullable = true, length = 100)
     private String model;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    @JsonBackReference
+    private Product product;
 
     public int getDescriptionId() {
         return descriptionId;
@@ -33,14 +35,6 @@ public class Description implements Serializable {
 
     public void setDescriptionId(int descriptionId) {
         this.descriptionId = descriptionId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public String getManufacturer() {
@@ -67,14 +61,22 @@ public class Description implements Serializable {
         this.model = model;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "Description{" +
                 "descriptionId=" + descriptionId +
-                ", productId=" + productId +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", series='" + series + '\'' +
                 ", model='" + model + '\'' +
+                ", product=" + product +
                 '}';
     }
 }
