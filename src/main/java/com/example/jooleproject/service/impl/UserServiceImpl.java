@@ -4,6 +4,7 @@ import com.example.jooleproject.entity.User;
 import com.example.jooleproject.repository.UserRepository;
 import com.example.jooleproject.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAllUser() {
@@ -32,6 +35,7 @@ public class UserServiceImpl implements IUserService {
             if (user1 != null){
                 return "This username already exists, please change it!";
             }
+            user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
             userRepository.save(user);
         }catch (Exception e){
             msg = "add failed!";

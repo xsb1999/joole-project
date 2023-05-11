@@ -2,7 +2,15 @@ package com.example.jooleproject.controller;
 
 import com.example.jooleproject.entity.User;
 import com.example.jooleproject.service.IUserService;
+import com.example.jooleproject.service.impl.UserDetailService;
+import com.example.jooleproject.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +20,28 @@ import java.util.List;
 public class UserController {
     @Autowired
     private IUserService iUserService;
+    @Autowired
+    private UserDetailService userDetailService;
+    @Autowired
+    private JwtUtil jwtUtilToken;
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception{
+        String username = user.getUserName();
+        String password = user.getUserPassword();
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        }
+        catch (BadCredentialsException e){
+            throw new Exception("Incorrect username or password", e);
+        }
+
+        final UserDetails userDetails = userDetailService.loadUserByUsername(username);
+        final String jwt = jwtUtilToken.generateToken(userDetails);
+        return new ResponseEntity<>(jwt, HttpStatus.OK);
+    }
 
     @GetMapping("/findAllUser")
     public List<User> findAllUser(){

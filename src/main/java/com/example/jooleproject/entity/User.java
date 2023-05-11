@@ -24,6 +24,9 @@ public class User implements Serializable{
     @Basic
     @Column(name = "user_password", nullable = true, length = 100)
     private String userPassword;
+    @Basic
+    @Column(name = "user_role", nullable = true, length = 100)
+    private String userRole;
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     List<Project> projectList = new ArrayList<>();
@@ -60,26 +63,22 @@ public class User implements Serializable{
         this.projectList = projectList;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userName='" + userName + '\'' +
                 ", userType='" + userType + '\'' +
                 ", userPassword='" + userPassword + '\'' +
+                ", userRole='" + userRole + '\'' +
                 ", projectList=" + projectList +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userName, user.userName) && Objects.equals(userType, user.userType) && Objects.equals(userPassword, user.userPassword);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userName, userType, userPassword);
     }
 }
