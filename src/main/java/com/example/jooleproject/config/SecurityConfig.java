@@ -55,10 +55,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/user/authenticate").permitAll()
                 .requestMatchers("/user/findAllUser").hasRole("ADMIN")
-                .requestMatchers("/user/addUser").permitAll()
-                //.requestMatchers("/search/**").permitAll()
-//                .requestMatchers("/user/**").permitAll()
-                //.requestMatchers("/products").hasRole("admin")
+                .requestMatchers("/user/findUserByUserName").hasRole("ADMIN")
+                .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/project/**").hasRole("DESIGNER")
+                .requestMatchers("/product/addProduct").hasAnyRole("MANUFACTURER", "ADMIN")
+                .requestMatchers("/product/addProductWithAllInfo").hasAnyRole("MANUFACTURER", "ADMIN")
+                .requestMatchers("/product/deleteProduct").hasAnyRole("MANUFACTURER", "ADMIN")
+                .requestMatchers("/product/searchProductByBrand").fullyAuthenticated()
+                .requestMatchers("/product/searchProductAdvance").fullyAuthenticated()
+                .requestMatchers("/product/**").hasRole("DESIGNER")
                 .anyRequest().fullyAuthenticated();// others need to be accessed after authentication
 
 

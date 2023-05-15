@@ -68,7 +68,9 @@ public class ProjectServiceImpl implements IProjectService {
             List<Project> list = user.getProjectList();
             Project project = projectRepository.getById(projectId);
             project.setUser(user);
-            list.add(project);
+            if (!list.contains(project)){
+                list.add(project);
+            }
             user.setProjectList(list);
             userRepository.save(user);
         }catch (Exception e){

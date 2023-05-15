@@ -1,8 +1,6 @@
 package com.example.jooleproject.controller;
 
-import com.example.jooleproject.entity.Product;
-import com.example.jooleproject.entity.ProjectProduct;
-import com.example.jooleproject.entity.TechnicalDetail;
+import com.example.jooleproject.entity.*;
 import com.example.jooleproject.service.IProductService;
 import com.example.jooleproject.service.IProjectProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,19 @@ public class ProductController {
         String msg="";
         try {
             msg = iProductService.addProduct(product);
+        }
+        catch (Exception exception){
+            msg = "System error, please contact administrator...";
+            System.err.println(exception);
+        }
+        return msg;
+    }
+
+    @PostMapping("/addProductWithAllInfo")
+    public String addProductWithAllInfo(@RequestBody ProductInfo productInfo){
+        String msg="";
+        try {
+            msg = iProductService.addProductWithAllInfo(productInfo);
         }
         catch (Exception exception){
             msg = "System error, please contact administrator...";
@@ -84,5 +95,15 @@ public class ProductController {
     @GetMapping("/getProductsByProjectId")
     public List<Product> getProductsByProjectId(@RequestParam int projectId){
         return iProjectProductService.getProductsByProjectId(projectId);
+    }
+
+    @GetMapping("/searchProductByBrand")
+    public List<Product> searchProductByBrand(@RequestParam String brand){
+        return iProductService.searchProductByBrand(brand);
+    }
+
+    @GetMapping("/searchProductAdvance")
+    public Set<Product> searchProductAdvance(@RequestBody ProductInfo productInfo){
+        return iProductService.searchProductAdvance(productInfo);
     }
 }

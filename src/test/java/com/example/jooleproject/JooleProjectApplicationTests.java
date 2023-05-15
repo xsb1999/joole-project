@@ -23,7 +23,16 @@ class JooleProjectApplicationTests {
     private ProductRepository productRepository;
     @Autowired
     private TechnicalDetailRepository technicalDetailRepository;
+    @Autowired
+    private DescriptionRepository descriptionRepository;
 
+    @Test
+    void testDescription() {
+        List<Product> productList = descriptionRepository.searchProductAdvanceDescription("a","b",null);
+        for(Product p: productList){
+            System.out.println(p.getProductId());
+        }
+    }
 
     @Test
     void testTechnicalDetailAndProduct() {
