@@ -43,9 +43,12 @@ public class ProjectServiceImpl implements IProjectService {
     public String deleteProject(int projectId) {
         String msg = "delete success!";
         try {
-            // also need to detach all the related products
-            // ...
-
+            Project project = projectRepository.findByProjectId(projectId);
+            if (project == null){
+                return "project doesn't exist!";
+            }
+            project.setUser(null);
+            projectRepository.save(project);
             projectRepository.deleteById(projectId);
         }catch (Exception e){
             msg = "add failed";

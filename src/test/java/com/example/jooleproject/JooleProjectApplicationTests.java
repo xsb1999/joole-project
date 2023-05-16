@@ -2,6 +2,7 @@ package com.example.jooleproject;
 
 import com.example.jooleproject.entity.*;
 import com.example.jooleproject.repository.*;
+import com.example.jooleproject.service.IProjectService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,15 @@ class JooleProjectApplicationTests {
     private TechnicalDetailRepository technicalDetailRepository;
     @Autowired
     private DescriptionRepository descriptionRepository;
+    @Autowired
+    private IProjectService iProjectService;
 
+    @Test
+    void testProjectDelete() {
+
+//        iProjectService.deleteProject(15);
+
+    }
     @Test
     void testDescription() {
         List<Product> productList = descriptionRepository.searchProductAdvanceDescription("a","b",null);

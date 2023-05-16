@@ -17,12 +17,12 @@ public class Project implements Serializable {
     @Id
     @Column(name = "project_id", nullable = false)
     private int projectId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy="project", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy="project", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 //    @JsonManagedReference
     private Set<ProjectProduct> projectProducts;
 

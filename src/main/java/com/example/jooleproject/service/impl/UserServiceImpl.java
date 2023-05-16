@@ -48,6 +48,9 @@ public class UserServiceImpl implements IUserService {
     public String deleteUser(String username) {
         String msg = "delete success!";
         try {
+            if (findUserByUserName(username) == null){
+                return "user doesn't exist!";
+            }
             userRepository.deleteById(username);
         }catch (Exception e){
             msg = "delete failed!";

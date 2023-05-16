@@ -81,6 +81,9 @@ public class ProductServiceImpl implements IProductService {
     public String deleteProduct(int productId) {
         String msg = "delete success!";
         try {
+            if (productRepository.findByProductId(productId) == null){
+                return "product doesn't exist!";
+            }
             productRepository.deleteById(productId);
         }catch (Exception e){
             msg = "delete failed!";
