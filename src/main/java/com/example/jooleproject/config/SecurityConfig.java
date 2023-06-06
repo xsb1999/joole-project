@@ -53,17 +53,17 @@ public class SecurityConfig {
                 //Cross-origin-resource-sharing
                 .cors().and()
                 .authorizeHttpRequests()
-                .requestMatchers("/user/authenticate").permitAll()
-                .requestMatchers("/user/findAllUser").hasRole("ADMIN")
-                .requestMatchers("/user/findUserByUserName").hasRole("ADMIN")
-                .requestMatchers("/user/**").permitAll()
-                .requestMatchers("/project/**").hasRole("DESIGNER")
-                .requestMatchers("/product/addProduct").hasAnyRole("MANUFACTURER", "ADMIN")
-                .requestMatchers("/product/addProductWithAllInfo").hasAnyRole("MANUFACTURER", "ADMIN")
-                .requestMatchers("/product/deleteProduct").hasAnyRole("MANUFACTURER", "ADMIN")
-                .requestMatchers("/product/searchProductByBrand").fullyAuthenticated()
-                .requestMatchers("/product/searchProductAdvance").fullyAuthenticated()
-                .requestMatchers("/product/**").hasRole("DESIGNER")
+                .requestMatchers("/api/user/authenticate").permitAll()
+                .requestMatchers("/api/user/findAllUser").hasRole("ADMIN")
+                .requestMatchers("/api/user/findUserByUserName").hasRole("ADMIN")
+                .requestMatchers("/api/user/**").permitAll()
+                .requestMatchers("/api/project/**").hasRole("DESIGNER")
+                .requestMatchers("/api/product/addProduct").hasAnyRole("MANUFACTURER", "ADMIN")
+                .requestMatchers("/api/product/addProductWithAllInfo").hasAnyRole("MANUFACTURER", "ADMIN")
+                .requestMatchers("/api/product/deleteProduct").hasAnyRole("MANUFACTURER", "ADMIN")
+                .requestMatchers("/api/product/searchProductByBrand").fullyAuthenticated()
+                .requestMatchers("/api/product/searchProductAdvance").fullyAuthenticated()
+                .requestMatchers("/api/product/**").hasAnyRole("DESIGNER", "ADMIN")
                 .anyRequest().fullyAuthenticated();// others need to be accessed after authentication
 
 

@@ -15,6 +15,7 @@ import java.util.Set;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findByProductId(int id);
+    List<Product> findByProductBrand(String brand);
     @Query(value = "select p from Product p where p.productBrand like %?1%")
     List<Product> findByProductBrandLike(String brand);
 }

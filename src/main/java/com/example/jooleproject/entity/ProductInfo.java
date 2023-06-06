@@ -13,8 +13,17 @@ public class ProductInfo {
     private Date modelYear;
     private Integer airflow;
     private Integer power;
+    private Integer powerMin;
     private Integer operatingVoltage;
+    private Integer operatingVoltageMin;
     private Integer fanSpeed;
+    private Integer fanSpeedMin;
+    private Integer fanSpeedNum;
+    private Integer diameter;
+    private Integer sound;
+    private Integer height;
+    private Integer heightMin;
+    private Integer weight;
     private String productBrand;
     private String certification;
 
@@ -130,6 +139,78 @@ public class ProductInfo {
         this.certification = certification;
     }
 
+    public Integer getPowerMin() {
+        return powerMin;
+    }
+
+    public void setPowerMin(Integer powerMin) {
+        this.powerMin = powerMin;
+    }
+
+    public Integer getOperatingVoltageMin() {
+        return operatingVoltageMin;
+    }
+
+    public void setOperatingVoltageMin(Integer operatingVoltageMin) {
+        this.operatingVoltageMin = operatingVoltageMin;
+    }
+
+    public Integer getFanSpeedMin() {
+        return fanSpeedMin;
+    }
+
+    public void setFanSpeedMin(Integer fanSpeedMin) {
+        this.fanSpeedMin = fanSpeedMin;
+    }
+
+    public Integer getFanSpeedNum() {
+        return fanSpeedNum;
+    }
+
+    public void setFanSpeedNum(Integer fanSpeedNum) {
+        this.fanSpeedNum = fanSpeedNum;
+    }
+
+    public Integer getDiameter() {
+        return diameter;
+    }
+
+    public void setDiameter(Integer diameter) {
+        this.diameter = diameter;
+    }
+
+    public Integer getSound() {
+        return sound;
+    }
+
+    public void setSound(Integer sound) {
+        this.sound = sound;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getHeightMin() {
+        return heightMin;
+    }
+
+    public void setHeightMin(Integer heightMin) {
+        this.heightMin = heightMin;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
         return "ProductInfo{" +
@@ -143,8 +224,17 @@ public class ProductInfo {
                 ", modelYear=" + modelYear +
                 ", airflow=" + airflow +
                 ", power=" + power +
+                ", powerMin=" + powerMin +
                 ", operatingVoltage=" + operatingVoltage +
+                ", operatingVoltageMin=" + operatingVoltageMin +
                 ", fanSpeed=" + fanSpeed +
+                ", fanSpeedMin=" + fanSpeedMin +
+                ", fanSpeedNum=" + fanSpeedNum +
+                ", diameter=" + diameter +
+                ", sound=" + sound +
+                ", height=" + height +
+                ", heightMin=" + heightMin +
+                ", weight=" + weight +
                 ", productBrand='" + productBrand + '\'' +
                 ", certification='" + certification + '\'' +
                 '}';

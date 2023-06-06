@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 public class ProductController {
     @Autowired
     private IProductService iProductService;
@@ -106,4 +106,21 @@ public class ProductController {
     public Set<Product> searchProductAdvance(@RequestBody ProductInfo productInfo){
         return iProductService.searchProductAdvance(productInfo);
     }
+
+    @GetMapping("/getAllBrands")
+    public Set<String> getAllBrands(){
+        return iProductService.getAllBrands();
+    }
+
+    @GetMapping("/getProductInfoByBrand")
+    public List<ProductInfo> getProductInfoByBrand(@RequestParam String brand){
+        return iProductService.getProductInfoByBrand(brand);
+    }
+
+    @PostMapping("/advancedSearch")
+    public List<ProductInfo> advancedSearch(@RequestBody AdvancedSearchInfo searchInfo){
+        return iProductService.advancedSearch(searchInfo);
+    }
+
+
 }

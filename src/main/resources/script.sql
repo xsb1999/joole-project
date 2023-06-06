@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80019
 File Encoding         : 65001
 
-Date: 2023-05-05 00:54:54
+Date: 2023-06-06 11:31:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,11 +28,7 @@ CREATE TABLE `description` (
   PRIMARY KEY (`description_id`),
   KEY `description_product_product_id_fk` (`product_id`),
   CONSTRAINT `description_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of description
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for product
@@ -45,6 +41,7 @@ CREATE TABLE `product` (
   `description_id` int DEFAULT NULL,
   `product_brand` varchar(500) DEFAULT NULL,
   `certification` varchar(500) DEFAULT NULL,
+  `project_products` varbinary(255) DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `product_description_description_id_fk` (`description_id`),
   KEY `product_product_type_product_type_id_fk` (`product_type_id`),
@@ -52,11 +49,7 @@ CREATE TABLE `product` (
   CONSTRAINT `product_description_description_id_fk` FOREIGN KEY (`description_id`) REFERENCES `description` (`description_id`),
   CONSTRAINT `product_product_type_product_type_id_fk` FOREIGN KEY (`product_type_id`) REFERENCES `product_type` (`product_type_id`),
   CONSTRAINT `product_technical_detail_technical_detail_id_fk` FOREIGN KEY (`technical_detail_id`) REFERENCES `technical_detail` (`technical_detail_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of product
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for product_type
@@ -73,11 +66,7 @@ CREATE TABLE `product_type` (
   PRIMARY KEY (`product_type_id`),
   KEY `product_type_product_product_id_fk` (`product_id`),
   CONSTRAINT `product_type_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of product_type
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for project
@@ -89,11 +78,7 @@ CREATE TABLE `project` (
   PRIMARY KEY (`project_id`),
   KEY `project_user_user_name_fk` (`user_name`),
   CONSTRAINT `project_user_user_name_fk` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of project
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for project_product
@@ -108,11 +93,7 @@ CREATE TABLE `project_product` (
   KEY `project_product_project_project_id_fk` (`project_id`),
   CONSTRAINT `project_product_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   CONSTRAINT `project_product_project_project_id_fk` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of project_product
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for technical_detail
@@ -125,14 +106,19 @@ CREATE TABLE `technical_detail` (
   `power` int DEFAULT NULL,
   `operating_voltage` int DEFAULT NULL,
   `fan_speed` int DEFAULT NULL,
+  `power_min` int DEFAULT NULL,
+  `operating_voltage_min` int DEFAULT NULL,
+  `fan_speed_num` int DEFAULT NULL,
+  `sound` int DEFAULT NULL,
+  `diameter` int DEFAULT NULL,
+  `height` int DEFAULT NULL,
+  `height_min` int DEFAULT NULL,
+  `weight` int DEFAULT NULL,
+  `fan_speed_min` int DEFAULT NULL,
   PRIMARY KEY (`technical_detail_id`),
   KEY `technical_detail_product_product_id_fk` (`product_id`),
   CONSTRAINT `technical_detail_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of technical_detail
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user
@@ -142,9 +128,6 @@ CREATE TABLE `user` (
   `user_name` varchar(100) NOT NULL,
   `user_type` varchar(50) DEFAULT NULL,
   `user_password` varchar(100) DEFAULT NULL,
+  `user_role` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user
--- ----------------------------

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private IUserService iUserService;
@@ -27,10 +27,16 @@ public class UserController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @GetMapping("/test")
+    public List<User> test(){
+        return iUserService.findAllUser();
+    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception{
         String username = user.getUserName();
         String password = user.getUserPassword();
+
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         }

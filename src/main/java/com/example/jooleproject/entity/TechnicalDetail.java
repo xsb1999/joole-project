@@ -27,6 +27,33 @@ public class TechnicalDetail implements Serializable {
     @Basic
     @Column(name = "fan_speed", nullable = true)
     private Integer fanSpeed;
+    @Basic
+    @Column(name = "fan_speed_min", nullable = true)
+    private Integer fanSpeedMin;
+    @Basic
+    @Column(name = "power_min", nullable = true)
+    private Integer powerMin;
+    @Basic
+    @Column(name = "operating_voltage_min", nullable = true)
+    private Integer operatingVoltageMin;
+    @Basic
+    @Column(name = "fan_speed_num", nullable = true)
+    private Integer fanSpeedNum;
+    @Basic
+    @Column(name = "sound", nullable = true)
+    private Integer sound;
+    @Basic
+    @Column(name = "diameter", nullable = true)
+    private Integer diameter;
+    @Basic
+    @Column(name = "height", nullable = true)
+    private Integer height;
+    @Basic
+    @Column(name = "height_min", nullable = true)
+    private Integer heightMin;
+    @Basic
+    @Column(name = "weight", nullable = true)
+    private Integer weight;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -81,6 +108,78 @@ public class TechnicalDetail implements Serializable {
         this.product = product;
     }
 
+    public Integer getFanSpeedMin() {
+        return fanSpeedMin;
+    }
+
+    public void setFanSpeedMin(Integer fanSpeedMin) {
+        this.fanSpeedMin = fanSpeedMin;
+    }
+
+    public Integer getPowerMin() {
+        return powerMin;
+    }
+
+    public void setPowerMin(Integer powerMin) {
+        this.powerMin = powerMin;
+    }
+
+    public Integer getOperatingVoltageMin() {
+        return operatingVoltageMin;
+    }
+
+    public void setOperatingVoltageMin(Integer operatingVoltageMin) {
+        this.operatingVoltageMin = operatingVoltageMin;
+    }
+
+    public Integer getFanSpeedNum() {
+        return fanSpeedNum;
+    }
+
+    public void setFanSpeedNum(Integer fanSpeedNum) {
+        this.fanSpeedNum = fanSpeedNum;
+    }
+
+    public Integer getSound() {
+        return sound;
+    }
+
+    public void setSound(Integer sound) {
+        this.sound = sound;
+    }
+
+    public Integer getDiameter() {
+        return diameter;
+    }
+
+    public void setDiameter(Integer diameter) {
+        this.diameter = diameter;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getHeightMin() {
+        return heightMin;
+    }
+
+    public void setHeightMin(Integer heightMin) {
+        this.heightMin = heightMin;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
         return "TechnicalDetail{" +
@@ -89,6 +188,15 @@ public class TechnicalDetail implements Serializable {
                 ", power=" + power +
                 ", operatingVoltage=" + operatingVoltage +
                 ", fanSpeed=" + fanSpeed +
+                ", fanSpeedMin=" + fanSpeedMin +
+                ", powerMin=" + powerMin +
+                ", operatingVoltageMin=" + operatingVoltageMin +
+                ", fanSpeedNum=" + fanSpeedNum +
+                ", sound=" + sound +
+                ", diameter=" + diameter +
+                ", height=" + height +
+                ", heightMin=" + heightMin +
+                ", weight=" + weight +
                 ", product=" + product +
                 '}';
     }

@@ -124,5 +124,78 @@ public class ProductServiceImpl implements IProductService {
         return set;
     }
 
+    @Override
+    public Set<String> getAllBrands() {
+        Set<String> set = new HashSet<>();
+        List<Product> productList = productRepository.findAll();
+        for(Product p: productList){
+            set.add(p.getProductBrand());
+        }
+        return set;
+    }
+
+    @Override
+    public List<ProductInfo> getProductInfoByBrand(String brand) {
+        List<Product> productList = productRepository.findByProductBrand(brand);
+        List<ProductInfo> productInfoList = new ArrayList<>();
+        for(Product p: productList){
+            TechnicalDetail technicalDetail = technicalDetailRepository.findByProduct(p);
+            Description description = descriptionRepository.findByProduct(p);
+            ProductType productType = productTypeRepository.findByProduct(p);
+            ProductInfo productInfo = new ProductInfo();
+            if (description != null){
+                productInfo.setManufacturer(description.getManufacturer());
+                productInfo.setSeries(description.getSeries());
+                productInfo.setModel(description.getModel());
+            }
+            if (productType != null){
+                productInfo.setApplication(productType.getApplication());
+                productInfo.setType(productType.getType());
+                productInfo.setMountingLocation(productType.getMountingLocation());
+                productInfo.setAccessories(productType.getAccessories());
+                productInfo.setModelYear(productType.getModelYear());
+            }
+            if (technicalDetail != null){
+                productInfo.setAirflow(technicalDetail.getAirflow());
+                productInfo.setPower(technicalDetail.getPower());
+                productInfo.setOperatingVoltage(technicalDetail.getOperatingVoltage());
+                productInfo.setFanSpeed(technicalDetail.getFanSpeed());
+                productInfo.setFanSpeedMin(technicalDetail.getFanSpeedMin());
+                productInfo.setPowerMin(technicalDetail.getPowerMin());
+                productInfo.setOperatingVoltageMin(technicalDetail.getOperatingVoltageMin());
+                productInfo.setHeightMin(technicalDetail.getHeightMin());
+                productInfo.setHeight(technicalDetail.getHeight());
+                productInfo.setWeight(technicalDetail.getWeight());
+                productInfo.setSound(technicalDetail.getSound());
+                productInfo.setDiameter(technicalDetail.getDiameter());
+                productInfo.setFanSpeedNum(technicalDetail.getFanSpeedNum());
+            }
+            productInfo.setProductBrand(p.getProductBrand());
+            productInfo.setCertification(p.getCertification());
+            productInfoList.add(productInfo);
+        }
+        return productInfoList;
+    }
+
+    @Override
+    public List<ProductInfo> advancedSearch(AdvancedSearchInfo searchInfo) {
+        List<ProductInfo> productInfoList = new ArrayList<>();
+        List<ProductInfo> infoList = getProductInfoByBrand(searchInfo.getProductBrand());
+
+        for(ProductInfo p: infoList){
+            if (p.getType().equals(searchInfo.getType()) && p.getApplication().equals(searchInfo.getApplication())
+            && p.getMountingLocation().equals(searchInfo.getMountingLocation()) && p.getAccessories().equals(searchInfo.getAccessories())
+            && (p.getModelYear().toLocalDate().getYear() <= searchInfo.getYearEnd() && p.getModelYear().toLocalDate().getYear() >= searchInfo.getYearStart())
+            && (p.getAirflow() <= searchInfo.getAirflowMax() && p.getAirflow() >= searchInfo.getAirflowMin())
+            && (p.getPower() <= searchInfo.getPowerMax() && p.getPowerMin() >= searchInfo.getPowerMin())
+            && (p.getSound() <= searchInfo.getSoundMax() && p.getSound() >= searchInfo.getSoundMin())
+            && (p.getDiameter() <= searchInfo.getDiameterMax() && p.getDiameter() >= searchInfo.getDiameterMin())
+            && (p.getHeight() <= searchInfo.getHeightMax() && p.getHeightMin() >= searchInfo.getHeightMin()) ){
+                productInfoList.add(p);
+            }
+        }
+        return productInfoList;
+    }
+
 
 }

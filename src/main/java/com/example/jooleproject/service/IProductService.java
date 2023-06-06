@@ -12,4 +12,7 @@ public interface IProductService {
     TechnicalDetail getTechnicalDetailByProductId(int productId);
     List<Product> searchProductByBrand(String brand);
     Set<Product> searchProductAdvance(ProductInfo productInfo);
+    Set<String> getAllBrands();
+    List<ProductInfo> getProductInfoByBrand(String brand);
+    List<ProductInfo> advancedSearch(AdvancedSearchInfo searchInfo);
 }

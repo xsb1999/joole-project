@@ -2,6 +2,7 @@ package com.example.jooleproject;
 
 import com.example.jooleproject.entity.*;
 import com.example.jooleproject.repository.*;
+import com.example.jooleproject.service.IProductService;
 import com.example.jooleproject.service.IProjectService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -28,11 +29,14 @@ class JooleProjectApplicationTests {
     private DescriptionRepository descriptionRepository;
     @Autowired
     private IProjectService iProjectService;
+    @Autowired
+    private IProductService iProductService;
 
     @Test
-    void testProjectDelete() {
-
-//        iProjectService.deleteProject(15);
+    void testFindTechnicalDetailByProduct() {
+//        List<ProductInfo> list = iProductService.getProductInfoByBrand("HVAC Fans");
+//        List<Product> productList = productRepository.findByProductBrand("HVAC Fans");
+//        System.out.println(productList.size());
 
     }
     @Test
